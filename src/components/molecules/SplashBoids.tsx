@@ -15,11 +15,11 @@ const SplashBoids = () => {
   }, []);
 
   if (!mouse) {
-    return <div className="w-full h-full bg-black"></div>;
+    return <div className="w-full h-full "></div>;
   }
 
   return (
-    <div className="w-full h-full bg-black">
+    <div className="w-full h-full ">
       <BoidsCanvas mouse={mouse} />
     </div>
   );
