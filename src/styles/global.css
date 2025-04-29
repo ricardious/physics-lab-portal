@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  --font-fallback: "Adjusted Arial Fallback", system-ui, -apple-system,
+    blinkmacsystemfont, "Segoe UI", "Noto Sans", helvetica, arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-primary: "IBM Plex Sans";
+}
+
+@font-face {
+  font-family: "Adjusted Arial Fallback";
+  src: local(Arial);
+  size-adjust: 112%;
+  ascent-override: 74%;
+  descent-override: normal;
+  line-gap-override: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM Plex Sans Var-Roman.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM Plex Sans Var-Italic.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  font-family: "IBM Plex Sans", var(--font-fallback);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
