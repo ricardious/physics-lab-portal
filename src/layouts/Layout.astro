@@ -1,22 +1,89 @@
+---
+import "@/styles/global.css";
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Departamento Física</title>
+
+    <!-- Font Preloads -->
+    <link
+      rel="preload"
+      href="/fonts/IBM Plex Sans Var-Roman.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/IBM Plex Sans Var-Italic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <meta
+      name="description"
+      content="Página oficial del Departamento de Física de la Facultad de Ingeniería de la Universidad de San Carlos de Guatemala. Información sobre laboratorios, manuales, y actividades académicas."
+    />
+
+    <meta property="og:url" content="https://fisica.usac.edu.gt/fisica/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Departamento de Física - USAC" />
+    <meta
+      property="og:description"
+      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
+    />
+    <meta
+      property="og:image"
+      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
+    />
+    <meta property="og:locale" content="es_GT" />
+    <meta property="og:site_name" content="Departamento de Física USAC" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Departamento de Física - USAC" />
+    <meta
+      name="twitter:description"
+      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
+    />
+    <meta
+      name="twitter:image"
+      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
+    />
+  </head>
+  <body>
+    <noscript>
+      <div class="p-8 text-center text-gray-100 font-sans">
+        <h1 class="text-2xl font-bold mb-4">¡Atención!</h1>
+        <p class="text-lg">
+          El <strong>Portal de Física - USAC</strong> requiere JavaScript para visualizar
+          simulaciones y contenido interactivo.
+        </p>
+        <p class="mt-4">
+          Por favor activa JavaScript en tu navegador para disfrutar de todas
+          las funcionalidades.
+        </p>
+      </div>
+    </noscript>
+
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #222222;
+    display: flex;
+    flex-direction: column;
+  }
 </style>
