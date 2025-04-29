@@ -41,8 +41,11 @@ const BoidsCanvas = ({ mouse }: BoidsCanvasProps) => {
 
     // Set canvas size with proper pixel density
     const setCanvasSize = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      const dpr = window.devicePixelRatio || 1;
 
       canvas.width = w * 2;
       canvas.height = h * 2;
