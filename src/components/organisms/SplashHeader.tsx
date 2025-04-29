@@ -1,21 +1,13 @@
 import { useState, useEffect } from "react";
 import SplashBoids from "../molecules/SplashBoids";
 
-interface SplashHeaderProps {
-  title?: string;
-  subtitle?: string;
-}
-
-const SplashHeader = ({
-  title = "EXPLORABLE",
-  subtitle = "EXPLANATIONS",
-}: SplashHeaderProps) => {
+const SplashHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   // Check viewport width on client-side
   useEffect(() => {
     const checkWidth = () => {
-      setIsMobile(window.innerWidth <= 900);
+      setIsMobile(window.innerWidth <= 641);
     };
 
     checkWidth();
@@ -27,41 +19,35 @@ const SplashHeader = ({
   }, []);
 
   return (
-    <div className="relative w-full h-[40vh]">
+    <div className="relative w-full h-[390px] overflow-hidden">
       {/* Boids Canvas Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 w-full h-[400px]">
         <SplashBoids />
       </div>
 
       {/* Title Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+      <div className="relative z-10 flex flex-col items-center h-full text-white">
         <div
+          id="splash_title"
           className={`text-center ${
-            isMobile ? "mt-24 text-6xl" : "mt-16 text-8xl"
-          }`}
+            isMobile ? "text-4xl mt-[105px]" : "text-[80px] mt-[115px]"
+          } leading-[0.85em] pointer-events-none cursor-default`}
         >
-          <h1 className="font-bold">
-            <span className="tracking-wider text-[1.085em]">
-              E<span className="relative right-[-4px]">X</span>
-              <span className="relative right-[-5px]">P</span>L
-              <span className="relative left-[-3px]">O</span>
-              <span className="relative left-[-8px]">R</span>ABLE
-            </span>
+          <h1>
+            <b className="tracking-[4px] text-[1.085em]">LABORATORIOS FÍSICA</b>
             <br />
-            <span className="tracking-wider">
-              EXP<span className="relative left-[-6px]">L</span>ANATIONS
+            <span className="tracking-[3px] text-[0.8em]">
+              FACULTAD INGENIERÍA
             </span>
           </h1>
         </div>
 
         {/* Down Arrow */}
-        <div className="absolute bottom-8 flex flex-col items-center">
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-6 h-6 border-b-2 border-r-2 border-white transform rotate-45"></div>
-            <div className="w-6 h-6 border-b-2 border-r-2 border-white transform rotate-45"></div>
-            <div className="w-6 h-6 border-b-2 border-r-2 border-white transform rotate-45"></div>
-            <div className="w-6 h-6 border-b-2 border-r-2 border-white transform rotate-45"></div>
-          </div>
+        <div className="absolute bottom-0 w-full h-[50px] pointer-events-none">
+          <div className="absolute w-1/2 h-full bg-white left-[-50px]"></div>
+          <div className="absolute w-1/2 h-full bg-white right-[-50px]"></div>
+          <div className="absolute w-0 h-0 border-solid border-l-[50px] border-l-white border-t-[50px] border-t-transparent left-[calc(50%-50px)]"></div>
+          <div className="absolute w-0 h-0 border-solid border-r-[50px] border-r-white border-t-[50px] border-t-transparent right-[calc(50%-50px)]"></div>
         </div>
       </div>
     </div>
