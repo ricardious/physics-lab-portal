@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Mouse } from "../../lib/helpers/MouseTracker";
 import type { Boid, Point } from "../../lib/types/types";
 import {
@@ -18,8 +18,10 @@ interface BoidsCanvasProps {
 
 const BoidsCanvas = ({ mouse }: BoidsCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef(null);
   const boidsRef = useRef<Boid[]>([]);
   const requestRef = useRef<number>(0);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   // Constants
   const TAU = Math.PI * 2;
@@ -45,12 +47,14 @@ const BoidsCanvas = ({ mouse }: BoidsCanvasProps) => {
       const w = rect.width;
       const h = rect.height;
 
-      const dpr = window.devicePixelRatio || 1;
-
       canvas.width = w * 2;
       canvas.height = h * 2;
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
+
+      // Center the mouse in the canvas on init
+      mouse.x = rect.width / 2;
+      mouse.y = rect.height / 2;
     };
 
     window.addEventListener("resize", setCanvasSize);
