@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import type { Mouse } from "../../lib/helpers/MouseTracker";
-import type { Boid, Point } from "../../lib/types/types";
+import type { Mouse } from "@/lib/helpers/MouseTracker";
+import type { Boid, Point } from "@/lib/types/types";
 import {
   angleToVector,
   vectorToAngle,
@@ -10,7 +10,7 @@ import {
   getCenterOfPoints,
   getClosestPoint,
   ifPointTooClose,
-} from "../../lib/helpers/VectorHelpers";
+} from "@/lib/helpers/VectorHelpers";
 
 interface BoidsCanvasProps {
   mouse: Mouse;

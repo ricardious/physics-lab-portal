@@ -1,5 +1,3 @@
-// src/lib/types/types.ts
-
 export type Vector = [number, number];
 
 export interface Point {

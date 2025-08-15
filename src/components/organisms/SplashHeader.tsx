@@ -1,4 +1,4 @@
-import SplashBoids from "../molecules/SplashBoids";
+import SplashBoids from "@/components/molecules/SplashBoids";
 
 const SplashHeader = () => {
   return (
