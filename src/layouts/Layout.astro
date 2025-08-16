@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import SplashHeader from "@/components/organisms/SplashHeader";
 ---
 
 <!doctype html>
@@ -14,14 +15,14 @@ import "@/styles/global.css";
     <!-- Font Preloads -->
     <link
       rel="preload"
-      href="/fonts/IBM Plex Sans Var-Roman.woff2"
+      href="/fonts/OpenSans-Light.ttf"
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
     />
     <link
       rel="preload"
-      href="/fonts/IBM Plex Sans Var-Italic.woff2"
+      href="/fonts/OpenSans-Bold.ttf"
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
@@ -71,8 +72,10 @@ import "@/styles/global.css";
         </p>
       </div>
     </noscript>
-
-    <slot />
+    <SplashHeader client:load />
+    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <slot />
+    </main>
   </body>
 </html>
 

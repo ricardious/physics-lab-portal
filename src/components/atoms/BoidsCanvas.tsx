@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { Mouse } from "@/lib/helpers/MouseTracker";
 import type { Boid, Point } from "@/lib/types/types";
 import {
@@ -18,10 +18,8 @@ interface BoidsCanvasProps {
 
 const BoidsCanvas = ({ mouse }: BoidsCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef(null);
   const boidsRef = useRef<Boid[]>([]);
   const requestRef = useRef<number>(0);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   // Constants
   const TAU = Math.PI * 2;
@@ -239,7 +237,7 @@ const BoidsCanvas = ({ mouse }: BoidsCanvasProps) => {
       boidsRef.current.forEach((boid) => boid.draw(ctx));
 
       // Draw circle
-      drawCircle(ctx, RUN_RADIUS * 0.7);
+      drawCircle(ctx, Math.min(canvas.width, canvas.height) * 0.3);
 
       // Request next frame
       requestRef.current = requestAnimationFrame(animate);

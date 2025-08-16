@@ -4,19 +4,18 @@
   --font-fallback: "Adjusted Arial Fallback", system-ui, -apple-system,
     blinkmacsystemfont, "Segoe UI", "Noto Sans", helvetica, arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
-  --font-primary: "IBM Plex Sans";
+  --font-primary: "Open Sans";
 
   --color-nebula: #0f0f13;
   --color-aurora: #2d3142;
-  --color-blackhole-core:  #09090f;
-  --color-event-horizon: #121218; 
+  --color-blackhole-core: #09090f;
+  --color-event-horizon: #121218;
   --color-starfield-layer: rgba(30, 30, 46, 0.6);
   --color-orbit-trail: rgba(67, 97, 238, 0.3);
   --color-cosmic-glow: rgba(67, 97, 238, 0.1);
   --color-starlight-text: #f8f9fa;
   --color-galaxy-core: #4361ee;
   --color-galaxy-core-dark: #3a0ca3;
-
 }
 
 @font-face {
@@ -44,8 +43,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 100;
+  src: url("fonts/OpenSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/OpenSans-Bold.ttf") format("truetype");
+}
+
 html {
-  font-family: "IBM Plex Sans", var(--font-fallback);
+  font-family: "Open Sans", var(--font-fallback);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

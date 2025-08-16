@@ -1,8 +1,12 @@
 ---
-import SplashHeader from "@/components/organisms/SplashHeader";
 import Layout from "@/layouts/Layout.astro";
+import GlassCard from "@/components/atoms/GlassCard.astro";
+import WelcomeText from "@/components/molecules/WelcomeText.astro";
 ---
 
 <Layout>
-  <SplashHeader client:load />
+  <GlassCard class="mt-8 text-white">
+    <h2 class="text-xl font-bold">Welcome to the Physics Lab Portal</h2>
+    <p class="mt-2">Explore our resources and tools for physics experiments.</p>
+  </GlassCard>
 </Layout>

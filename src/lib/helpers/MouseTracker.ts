@@ -48,41 +48,56 @@ export const createMouseTracker = (): Mouse => {
   */
 
   if (typeof window !== "undefined") {
-    const onMouseMove = (event: MouseEvent) => {
-      // Get canvas element
+    const isInsideCanvas = (clientX: number, clientY: number): boolean => {
       const canvas = document.querySelector("canvas");
+      if (!canvas) return false;
 
-      if (canvas) {
-        // Get canvas position and dimensions
-        const rect = canvas.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
+      return (
+        clientX >= rect.left &&
+        clientX <= rect.right &&
+        clientY >= rect.top &&
+        clientY <= rect.bottom
+      );
+    };
 
-        // Calculate position relative to canvas
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+    const onMouseMove = (event: MouseEvent) => {
+      if (isInsideCanvas(event.clientX, event.clientY)) {
+        // Get canvas element
+        const canvas = document.querySelector("canvas");
 
-        // Constrain to canvas bounds (0 to width, 0 to 400px height)
-        mouse.x = Math.max(0, Math.min(x, rect.width));
-        mouse.y = Math.max(0, Math.min(y, rect.height));
-      } else {
-        // Fallback if canvas not found
-        mouse.x = event.pageX;
-        mouse.y = event.pageY - window.pageYOffset;
+        if (canvas) {
+          // Get canvas position and dimensions
+          const rect = canvas.getBoundingClientRect();
+
+          // Calculate position relative to canvas
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          // Constrain to canvas bounds (0 to width, 0 to 400px height)
+          mouse.x = Math.max(0, Math.min(x, rect.width));
+          mouse.y = Math.max(0, Math.min(y, rect.height));
+        } else {
+          // Fallback if canvas not found
+          mouse.x = event.pageX;
+          mouse.y = event.pageY - window.pageYOffset;
+        }
       }
     };
 
     const onTouchMove = (event: TouchEvent) => {
-      const canvas = document.querySelector("canvas");
+      const touch = event.changedTouches[0];
+      if (isInsideCanvas(touch.clientX, touch.clientY)) {
+        const canvas = document.querySelector("canvas");
 
-      if (canvas) {
-        const rect = canvas.getBoundingClientRect();
-        const x = event.changedTouches[0].clientX - rect.left;
-        const y = event.changedTouches[0].clientY - rect.top;
+        if (canvas) {
+          const rect = canvas.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
 
-        mouse.x = Math.max(0, Math.min(x, rect.width));
-        mouse.y = Math.max(0, Math.min(y, rect.height));
-      } else {
-        mouse.x = event.changedTouches[0].clientX;
-        mouse.y = event.changedTouches[0].clientY - window.pageYOffset;
+          mouse.x = Math.max(0, Math.min(x, rect.width));
+          mouse.y = Math.max(0, Math.min(y, rect.height));
+        }
       }
       event.preventDefault();
     };
@@ -90,16 +105,20 @@ export const createMouseTracker = (): Mouse => {
     document.body.addEventListener(
       "mousedown",
       (event) => {
-        mouse.pressed = true;
-        onMouseMove(event);
+        if (isInsideCanvas(event.clientX, event.clientY)) {
+          mouse.pressed = true;
+          onMouseMove(event);
+        }
       },
       false
     );
 
     document.body.addEventListener(
       "mouseup",
-      () => {
-        mouse.pressed = false;
+      (event) => {
+        if (isInsideCanvas(event.clientX, event.clientY)) {
+          mouse.pressed = false;
+        }
       },
       false
     );
@@ -109,16 +128,22 @@ export const createMouseTracker = (): Mouse => {
     document.body.addEventListener(
       "touchstart",
       (event) => {
-        mouse.pressed = true;
-        onTouchMove(event);
+        const touch = event.changedTouches[0];
+        if (isInsideCanvas(touch.clientX, touch.clientY)) {
+          mouse.pressed = true;
+          onTouchMove(event);
+        }
       },
       false
     );
 
     document.body.addEventListener(
       "touchend",
-      () => {
-        mouse.pressed = false;
+      (event) => {
+        const touch = event.changedTouches[0];
+        if (isInsideCanvas(touch.clientX, touch.clientY)) {
+          mouse.pressed = false;
+        }
       },
       false
     );
