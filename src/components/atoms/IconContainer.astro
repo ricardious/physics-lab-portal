@@ -1,0 +1,19 @@
+---
+export interface Props {
+  iconHtml: string;
+  class?: string;
+}
+
+const { iconHtml, class: className = "" } = Astro.props;
+---
+
+<div
+  class={`relative flex h-11 w-11 items-center justify-center border border-panel-accent/18 bg-aurora/55 text-starlight-text transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-panel-accent/40 group-hover:text-panel-accent ${className}`}
+>
+  <Fragment set:html={iconHtml} />
+
+  <div
+    class="absolute inset-x-2 top-2 h-px bg-panel-accent/55"
+  >
+  </div>
+</div>

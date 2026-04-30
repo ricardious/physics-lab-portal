@@ -7,47 +7,7 @@ const { class: className = "" } = Astro.props;
 ---
 
 <section class={`text-center space-y-6 ${className}`}>
-  <div class="space-y-4">
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-starlight-text tracking-wide"
-    >
-      Bienvenidos al Portal de Física
-    </h2>
-
-    <div class="max-w-4xl mx-auto space-y-3">
-      <p class="text-lg sm:text-xl text-starlight-text/90 leading-relaxed">
-        <span class="text-galaxy-core font-semibold"
-          >Facultad de Ingeniería</span
-        > -
-        <span class="text-galaxy-core-dark font-semibold"
-          >Universidad de San Carlos de Guatemala</span
-        >
-      </p>
-
-      <p class="text-base sm:text-lg text-starlight-text/80 leading-relaxed">
-        Explora nuestros laboratorios, recursos académicos y herramientas para
-        el estudio de la física. Aquí encontrarás manuales de práctica,
-        simulaciones interactivas y toda la información necesaria para tu
-        formación científica.
-      </p>
-    </div>
-  </div>
-
-  <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-    <div
-      class="px-6 py-2 bg-galaxy-core/20 rounded-full border border-galaxy-core/30"
-    >
-      <span class="text-galaxy-core font-medium">📚 Recursos Académicos</span>
-    </div>
-    <div
-      class="px-6 py-2 bg-galaxy-core-dark/20 rounded-full border border-galaxy-core-dark/30"
-    >
-      <span class="text-galaxy-core-dark font-medium">🔬 Laboratorios</span>
-    </div>
-    <div
-      class="px-6 py-2 bg-starlight-text/10 rounded-full border border-starlight-text/20"
-    >
-      <span class="text-starlight-text font-medium">⚗️ Experimentos</span>
-    </div>
-  </div>
+  <p class="welcome-text mx-auto max-w-4xl text-base leading-relaxed text-starlight-text/78 sm:text-lg md:text-xl">
+    Recursos de laboratorio, documentos académicos y manuales organizados por tipo para encontrar más rápido lo que necesita cada curso.
+  </p>
 </section>
