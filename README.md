@@ -13,24 +13,35 @@ Este portal es una iniciativa para rediseñar y modernizar el sitio web actual (
 
 ## 🛠️ Desarrollo local
 
-Para iniciar el entorno de desarrollo local, sigue estos pasos:
+Para iniciar el entorno de desarrollo local desde cero, sigue estos pasos:
 
-1. **Instalar dependencias:**
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/ricardious/physics-lab-portal.git
+   ```
+
+2. **Entrar al directorio del proyecto y cambiar a la rama de desarrollo:**
+   ```bash
+   cd physics-lab-portal
+   git checkout develop
+   ```
+
+3. **Instalar dependencias:**
    ```bash
    npm install
-   # o
+   # o si prefieres pnpm
    pnpm install
    ```
 
-2. **Ejecutar el servidor de desarrollo:**
+4. **Ejecutar el servidor de desarrollo:**
    ```bash
    npm run dev
    # o
    pnpm dev
    ```
-   El sitio estará disponible en `http://localhost:4321`.
+   El sitio estará disponible localmente en `http://localhost:4321`.
 
-3. **Construir para producción:**
+5. **Construir para producción:**
    ```bash
    npm run build
    ```
