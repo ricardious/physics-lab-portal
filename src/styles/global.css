@@ -1,1 +1,94 @@
 @import "tailwindcss";
+
+@theme {
+  --font-fallback: "Adjusted Arial Fallback", system-ui, -apple-system,
+    blinkmacsystemfont, "Segoe UI", "Noto Sans", helvetica, arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-primary: "Open Sans";
+  --font-display: "IBM Plex Sans";
+
+  --color-nebula: #0f0f13;
+  --color-aurora: #2d3142;
+  --color-blackhole-core: #09090f;
+  --color-event-horizon: #121218;
+  --color-starfield-layer: rgba(30, 30, 46, 0.6);
+  --color-orbit-trail: rgba(67, 97, 238, 0.3);
+  --color-cosmic-glow: rgba(67, 97, 238, 0.1);
+  --color-starlight-text: #f8f9fa;
+  --color-galaxy-core: #4361ee;
+  --color-galaxy-core-dark: #3a0ca3;
+  --color-panel-edge: rgba(248, 249, 250, 0.12);
+  --color-panel-fill: rgba(18, 18, 24, 0.92);
+  --color-panel-highlight: rgba(67, 97, 238, 0.18);
+  --color-panel-accent: #8ea0ff;
+}
+
+@font-face {
+  font-family: "Adjusted Arial Fallback";
+  src: local(Arial);
+  size-adjust: 112%;
+  ascent-override: 74%;
+  descent-override: normal;
+  line-gap-override: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM Plex Sans Var-Roman.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBM Plex Sans Var-Italic.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 100;
+  src: url("fonts/OpenSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/OpenSans-Bold.ttf") format("truetype");
+}
+
+html {
+  font-family: "Open Sans", var(--font-fallback);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.display-title {
+  font-family: "IBM Plex Sans", var(--font-fallback);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-modal-viewer .rpv-core__viewer--dark {
+  --rpv-core__doc-loading-background-color: #12151d;
+  --rpv-core__doc-error-background-color: #12151d;
+  --rpv-core__inner-page-background-color: #161922;
+  --rpv-core__full-screen-target-background-color: #161922;
+  --rpv-core__minimal-button--hover-background-color: rgba(142, 160, 255, 0.12);
+  --rpv-core__minimal-button--selected-background-color: rgba(142, 160, 255, 0.2);
+  --rpv-core__menu-item--hover-background-color: rgba(142, 160, 255, 0.2);
+  --rpv-core__primary-button-background-color: #8ea0ff;
+  --rpv-core__popover-body-background-color: #12151d;
+  --rpv-core__textbox-background-color: #0d0f14;
+  --rpv-core__textbox-border-color: rgba(255, 255, 255, 0.12);
+  --rpv-default-layout__container-border-color: rgba(255, 255, 255, 0.08);
+  --rpv-default-layout__toolbar-background-color: #0d0f14;
+  --rpv-default-layout__toolbar-border-bottom-color: rgba(255, 255, 255, 0.08);
+  --rpv-default-layout__body-background-color: #161922;
+}

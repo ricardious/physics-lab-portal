@@ -6,6 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://ricardious.github.io',
+  base: '/physics-lab-portal',
   integrations: [react()],
 
   vite: {

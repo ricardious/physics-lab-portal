@@ -1,0 +1,13 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<section class={`text-center space-y-6 ${className}`}>
+  <p class="welcome-text mx-auto max-w-4xl text-base leading-relaxed text-starlight-text/78 sm:text-lg md:text-xl">
+    Recursos de laboratorio, documentos académicos y manuales organizados por tipo para encontrar más rápido lo que necesita cada curso.
+  </p>
+</section>
