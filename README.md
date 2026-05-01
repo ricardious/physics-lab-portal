@@ -29,20 +29,22 @@ Si deseas revisar el código o aportar a esta iniciativa, puedes hacerlo prepara
 
 3. **Instalar dependencias:**
    ```bash
-   npm install
-   # o si prefieres pnpm
    pnpm install
    ```
 
 4. **Ejecutar el servidor de desarrollo:**
    ```bash
-   npm run dev
-   # o
    pnpm dev
    ```
    El sitio estará disponible localmente en `http://localhost:4321`.
 
-5. **Enviar tus aportes:**
+5. **Actualizar dependencias:**
+   ```bash
+   pnpm run deps:update
+   ```
+   Esto ejecuta `ncu -u` sobre `package.json` y luego regenera el lockfile con `pnpm`.
+
+6. **Enviar tus aportes:**
    Crea una rama nueva para tus cambios, realiza los *commits* y luego abre un *Pull Request* hacia la rama `develop`.
 
 ## 📁 Estructura del proyecto
