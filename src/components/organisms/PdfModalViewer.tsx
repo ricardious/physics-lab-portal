@@ -24,6 +24,11 @@ function isPdfModalOpenDetail(value: unknown): value is PdfModalOpenDetail {
   return typeof detail.url === "string" && typeof detail.title === "string";
 }
 
+function resolveAssetUrl(url: string) {
+  if (/^https?:\/\//.test(url)) return url;
+  return `${base.endsWith("/") ? base : `${base}/`}${url.replace(/^\/+/, "")}`;
+}
+
 export default function PdfModalViewer() {
   const [modalState, setModalState] = useState<PdfModalState>(null);
 
@@ -35,7 +40,10 @@ export default function PdfModalViewer() {
     const openModal = (event: Event) => {
       const detail = (event as CustomEvent<unknown>).detail;
       if (!isPdfModalOpenDetail(detail)) return;
-      setModalState(detail);
+      setModalState({
+        ...detail,
+        url: resolveAssetUrl(detail.url),
+      });
     };
 
     const closeModal = () => setModalState(null);
@@ -46,14 +54,33 @@ export default function PdfModalViewer() {
       }
     };
 
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const trigger = target.closest("[data-pdf-trigger]");
+      if (!(trigger instanceof HTMLElement)) return;
+
+      const url = trigger.dataset.pdfUrl;
+      if (!url) return;
+
+      event.preventDefault();
+      setModalState({
+        url: resolveAssetUrl(url),
+        title: trigger.dataset.pdfTitle || "Documento",
+      });
+    };
+
     window.addEventListener(PDF_OPEN_EVENT, openModal as EventListener);
     window.addEventListener(PDF_CLOSE_EVENT, closeModal);
     window.addEventListener("keydown", handleEscape);
+    document.addEventListener("click", handleDocumentClick);
 
     return () => {
       window.removeEventListener(PDF_OPEN_EVENT, openModal as EventListener);
       window.removeEventListener(PDF_CLOSE_EVENT, closeModal);
       window.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("click", handleDocumentClick);
     };
   }, []);
 
