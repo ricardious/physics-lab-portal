@@ -36,12 +36,6 @@ Para iniciar el entorno de desarrollo local, sigue estos pasos:
    ```
    Genera los archivos estáticos en el directorio `dist/`.
 
-## 📦 Despliegue (GitHub Pages)
-
-El proyecto incluye un flujo de trabajo (workflow) en `.github/workflows/deploy.yml` que construye y despliega automáticamente el sitio en GitHub Pages cada vez que se hace un *push* a la rama `main`.
-
-La URL resultante será: `https://ricardious.github.io/physics-lab-portal/` (o la configurada si se asigna un dominio personalizado en el futuro).
-
 ## 📁 Estructura del proyecto
 
 ```text
