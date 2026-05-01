@@ -87,7 +87,7 @@ function isExternal(url: string) {
           </button>
         ) : (
           <a
-            href={program.url}
+            href={isExternal(program.url) ? program.url : import.meta.env.BASE_URL + (program.url.startsWith('/') ? program.url.slice(1) : program.url)}
             class="group relative flex items-center gap-4 overflow-hidden border border-white/8 bg-blackhole-core/40 px-4 py-4 transition-all duration-200 hover:-translate-y-1 hover:border-panel-accent/30 hover:bg-blackhole-core/60"
             download={isExternal(program.url) ? undefined : true}
             target={isExternal(program.url) ? "_blank" : undefined}
@@ -122,15 +122,26 @@ function isExternal(url: string) {
 
 <script define:vars={{ listId, PDF_OPEN_EVENT }}>
   const root = document.getElementById(listId);
+  const base = import.meta.env.BASE_URL;
+  const baseUrl = base.endsWith('/') ? base : base + '/';
+
   if (root) {
     const triggers = root.querySelectorAll("[data-pdf-trigger]");
 
     triggers.forEach((trigger) => {
       trigger.addEventListener("click", () => {
+        let pdfUrl = trigger.getAttribute("data-pdf-url") || "";
+        
+        // Si es una URL relativa (no empieza con http), le añadimos el base url
+        if (pdfUrl && !/^https?:\/\//.test(pdfUrl)) {
+          // Asegurarnos de no duplicar la barra inclinada
+          pdfUrl = pdfUrl.startsWith('/') ? baseUrl + pdfUrl.slice(1) : baseUrl + pdfUrl;
+        }
+
         window.dispatchEvent(
           new CustomEvent(PDF_OPEN_EVENT, {
             detail: {
-              url: trigger.getAttribute("data-pdf-url") || "",
+              url: pdfUrl,
               title: trigger.getAttribute("data-pdf-title") || "Documento",
             },
           }),
