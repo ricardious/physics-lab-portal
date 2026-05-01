@@ -7,7 +7,8 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const PDF_OPEN_EVENT = "physics-pdf-modal:open";
 const PDF_CLOSE_EVENT = "physics-pdf-modal:close";
-const PDF_WORKER_URL = "/pdf.worker.min.js";
+const base = import.meta.env.BASE_URL;
+const PDF_WORKER_URL = `${base.endsWith("/") ? base : base + "/"}pdf.worker.min.js`;
 
 type PdfModalOpenDetail = {
   url: string;
