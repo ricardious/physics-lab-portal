@@ -56,4 +56,4 @@ La URL resultante será: `https://ricardious.github.io/physics-lab-portal/` (o l
 ```
 
 ---
-*Desarrollado para la comunidad y estudiantes de física.*
+*Desarrollado como iniciativa personal por Ricardo (ricardious).*
