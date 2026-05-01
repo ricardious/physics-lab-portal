@@ -11,16 +11,17 @@ Este portal es una iniciativa para rediseñar y modernizar el sitio web actual (
 - **[Tailwind CSS v4](https://tailwindcss.com/)**: Framework de CSS utilitario para un estilizado rápido y moderno.
 - **GitHub Actions / Pages**: Despliegue continuo y alojamiento web.
 
-## 🛠️ Desarrollo local
+## 🤝 Cómo colaborar
 
-Para iniciar el entorno de desarrollo local desde cero, sigue estos pasos:
+Si deseas revisar el código o aportar a esta iniciativa, puedes hacerlo preparando tu entorno local de la siguiente manera:
 
 1. **Clonar el repositorio:**
    ```bash
    git clone https://github.com/ricardious/physics-lab-portal.git
    ```
 
-2. **Entrar al directorio del proyecto y cambiar a la rama de desarrollo:**
+2. **Entrar al directorio del proyecto y cambiar a la rama de desarrollo (`develop`):**
+   *(Nota: Todo el trabajo y nuevas implementaciones deben partir y apuntar a esta rama).*
    ```bash
    cd physics-lab-portal
    git checkout develop
@@ -41,11 +42,8 @@ Para iniciar el entorno de desarrollo local desde cero, sigue estos pasos:
    ```
    El sitio estará disponible localmente en `http://localhost:4321`.
 
-5. **Construir para producción:**
-   ```bash
-   npm run build
-   ```
-   Genera los archivos estáticos en el directorio `dist/`.
+5. **Enviar tus aportes:**
+   Crea una rama nueva para tus cambios, realiza los *commits* y luego abre un *Pull Request* hacia la rama `develop`.
 
 ## 📁 Estructura del proyecto
 
