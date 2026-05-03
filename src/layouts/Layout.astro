@@ -6,6 +6,12 @@ import PdfModalViewer from "@/components/organisms/PdfModalViewer";
 
 const base = import.meta.env.BASE_URL;
 const assetBase = base.endsWith("/") ? base : `${base}/`;
+const site = Astro.site ?? new URL("https://ricardious.github.io");
+const siteUrl = new URL(assetBase, site).toString();
+const ogImageUrl = new URL(`${assetBase}og-image.png`, site).toString();
+const title = "Portal de Laboratorios de Fisica | USAC";
+const description =
+  "Recursos de laboratorio, documentos academicos y manuales organizados para los cursos de Fisica de la Facultad de Ingenieria de la USAC.";
 ---
 
 <!doctype html>
@@ -15,7 +21,7 @@ const assetBase = base.endsWith("/") ? base : `${base}/`;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href={`${assetBase}favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
-    <title>Departamento Física</title>
+    <title>{title}</title>
 
     <!-- Font Preloads -->
     <link
@@ -35,32 +41,33 @@ const assetBase = base.endsWith("/") ? base : `${base}/`;
 
     <meta
       name="description"
-      content="Página oficial del Departamento de Física de la Facultad de Ingeniería de la Universidad de San Carlos de Guatemala. Información sobre laboratorios, manuales, y actividades académicas."
+      content={description}
     />
+    <meta name="theme-color" content="#0f0f13" />
 
-    <meta property="og:url" content="https://fisica.usac.edu.gt/fisica/" />
+    <meta property="og:url" content={siteUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Departamento de Física - USAC" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:description"
-      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
-    />
-    <meta
-      property="og:image"
-      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
+      property="og:image:alt"
+      content="Vista previa del Portal de Laboratorios de Fisica de la USAC con acceso a recursos, documentos y manuales."
     />
     <meta property="og:locale" content="es_GT" />
-    <meta property="og:site_name" content="Departamento de Física USAC" />
+    <meta property="og:site_name" content="Portal de Laboratorios de Fisica" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Departamento de Física - USAC" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta
-      name="twitter:description"
-      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
-    />
-    <meta
-      name="twitter:image"
-      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
+      name="twitter:image:alt"
+      content="Vista previa del Portal de Laboratorios de Fisica de la USAC con acceso a recursos, documentos y manuales."
     />
   </head>
   <body class="min-h-screen bg-nebula text-white flex flex-col">
