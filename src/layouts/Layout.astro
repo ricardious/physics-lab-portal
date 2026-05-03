@@ -6,6 +6,40 @@ import PdfModalViewer from "@/components/organisms/PdfModalViewer";
 
 const base = import.meta.env.BASE_URL;
 const assetBase = base.endsWith("/") ? base : `${base}/`;
+const site = Astro.site ?? new URL("https://ricardious.github.io");
+const siteUrl = new URL(assetBase, site).toString();
+const ogImageUrl = new URL(`${assetBase}og-image.png`, site).toString();
+const canonicalUrl = Astro.url ? new URL(Astro.url.pathname, site).toString() : siteUrl;
+const title = "Portal de Laboratorios de Fisica | USAC";
+const description =
+  "Recursos de laboratorio, documentos academicos y manuales organizados para los cursos de Fisica de la Facultad de Ingenieria de la USAC.";
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: "Portal de Laboratorios de Fisica | USAC",
+      inLanguage: "es-GT",
+      description,
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": `${siteUrl}#organization`,
+      name: "Departamento de Fisica, Facultad de Ingenieria, USAC",
+      url: siteUrl,
+      telephone: "+50224189117",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Segundo Nivel Edificio T-1, Ciudad Universitaria zona 12",
+        addressLocality: "Guatemala",
+        postalCode: "01012",
+        addressCountry: "GT",
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -14,74 +48,61 @@ const assetBase = base.endsWith("/") ? base : `${base}/`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href={`${assetBase}favicon.svg`} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
-    <title>Departamento Física</title>
-
-    <!-- Font Preloads -->
-    <link
-      rel="preload"
-      href={`${assetBase}fonts/OpenSans-Light.ttf`}
-      as="font"
-      type="font/ttf"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="preload"
-      href={`${assetBase}fonts/OpenSans-Bold.ttf`}
-      as="font"
-      type="font/ttf"
-      crossorigin="anonymous"
-    />
+    <title>{title}</title>
 
     <meta
       name="description"
-      content="Página oficial del Departamento de Física de la Facultad de Ingeniería de la Universidad de San Carlos de Guatemala. Información sobre laboratorios, manuales, y actividades académicas."
+      content={description}
     />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#0f0f13" />
 
-    <meta property="og:url" content="https://fisica.usac.edu.gt/fisica/" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Departamento de Física - USAC" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:description"
-      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
-    />
-    <meta
-      property="og:image"
-      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
+      property="og:image:alt"
+      content="Vista previa del Portal de Laboratorios de Fisica de la USAC con acceso a recursos, documentos y manuales."
     />
     <meta property="og:locale" content="es_GT" />
-    <meta property="og:site_name" content="Departamento de Física USAC" />
+    <meta property="og:site_name" content="Portal de Laboratorios de Fisica" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Departamento de Física - USAC" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta
-      name="twitter:description"
-      content="Explora los recursos académicos, laboratorios y eventos del Departamento de Física de la USAC."
+      name="twitter:image:alt"
+      content="Vista previa del Portal de Laboratorios de Fisica de la USAC con acceso a recursos, documentos y manuales."
     />
-    <meta
-      name="twitter:image"
-      content="https://fisica.usac.edu.gt/assets/og-imagen-fisica.jpg"
-    />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body class="min-h-screen bg-nebula text-white flex flex-col">
     <noscript>
       <div class="p-8 text-center text-gray-100 font-sans">
         <h1 class="text-2xl font-bold mb-4">¡Atención!</h1>
         <p class="text-lg">
-          El <strong>Portal de Física - USAC</strong> requiere JavaScript para visualizar
-          correctamente todos los elementos de la página.
+          El <strong>Portal de Física - USAC</strong> funciona sin JavaScript, pero algunas
+          funciones interactivas como la vista previa integrada de PDFs se desactivan.
         </p>
         <p class="mt-4">
-          Por favor activa JavaScript en tu navegador para disfrutar de la mejor
-          experiencia visual.
+          Puedes seguir navegando, abrir documentos y descargar recursos normalmente.
         </p>
       </div>
     </noscript>
-    <SplashHeader client:load />
+    <SplashHeader client:visible />
     <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
       <slot />
     </main>
-    <PdfModalViewer client:load />
+    <PdfModalViewer client:idle />
     <SiteFooter />
   </body>
 </html>
@@ -92,5 +113,46 @@ const assetBase = base.endsWith("/") ? base : `${base}/`;
     margin: 0;
     width: 100%;
     min-height: 100%;
+  }
+</style>
+
+<style
+  define:vars={{
+    ibmPlexSansRomanSrc: `url("${assetBase}fonts/IBM Plex Sans Var-Roman.woff2") format("woff2")`,
+    ibmPlexSansItalicSrc: `url("${assetBase}fonts/IBM Plex Sans Var-Italic.woff2") format("woff2")`,
+    openSansLightSrc: `url("${assetBase}fonts/OpenSans-Light.ttf") format("truetype")`,
+    openSansBoldSrc: `url("${assetBase}fonts/OpenSans-Bold.ttf") format("truetype")`,
+  }}
+>
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: var(--ibmPlexSansRomanSrc);
+    font-weight: 100 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: var(--ibmPlexSansItalicSrc);
+    font-weight: 100 700;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 100;
+    src: var(--openSansLightSrc);
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: var(--openSansBoldSrc);
+    font-display: swap;
   }
 </style>

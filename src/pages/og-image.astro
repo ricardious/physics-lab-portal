@@ -1,0 +1,225 @@
+---
+import "@/styles/global.css";
+import {
+  academicDocuments,
+  manualsAndPrograms,
+  softwareTools,
+} from "@/lib/constants/resources";
+
+const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith("/") ? base : `${base}/`;
+
+const highlights = [
+  { label: "Herramientas", value: softwareTools.length },
+  { label: "Documentos", value: academicDocuments.length },
+  { label: "Manuales", value: manualsAndPrograms.length },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OG Image | Portal de Laboratorios de Fisica</title>
+  </head>
+  <body>
+    <main class="og-shell">
+      <div class="og-orbit og-orbit-left"></div>
+      <div class="og-orbit og-orbit-right"></div>
+
+      <section class="og-content">
+        <header class="og-header">
+          <img src={`${assetBase}favicon.svg`} alt="" class="og-logo" />
+          <p class="og-kicker display-title">Facultad de Ingenieria · USAC</p>
+        </header>
+
+        <section class="og-copy">
+          <h1 class="og-title display-title">Laboratorios Fisica</h1>
+          <p class="og-subtitle">Portal de recursos academicos</p>
+          <p class="og-description">
+            Recursos de laboratorio, documentos academicos y manuales organizados
+            para ubicar material tecnico de cada curso sin ruido ni friccion.
+          </p>
+        </section>
+
+        <footer class="og-footer">
+          <div class="og-stats">
+            {
+              highlights.map((item) => (
+                <div class="og-stat">
+                  <div class="og-stat-value">{item.value}</div>
+                  <div class="og-stat-label display-title">{item.label}</div>
+                </div>
+              ))
+            }
+          </div>
+
+          <p class="og-url display-title">ricardious.github.io/physics-lab-portal</p>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(html),
+  :global(body) {
+    margin: 0;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 12% 12%, rgba(67, 97, 238, 0.22), transparent 26%),
+      radial-gradient(circle at 88% 84%, rgba(58, 12, 163, 0.16), transparent 24%),
+      linear-gradient(135deg, #09090f 0%, #0f0f13 55%, #121218 100%);
+  }
+
+  :global(body) {
+    color: #f8f9fa;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  :global([data-astro-dev-toolbar]),
+  :global([data-nextjs-dialog-overlay]),
+  :global([data-nextjs-dialog]),
+  :global(nextjs-portal),
+  :global(#__next-build-indicator) {
+    display: none !important;
+  }
+
+  .og-shell {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    padding: 44px 64px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .og-orbit {
+    position: absolute;
+    border: 1px solid rgba(142, 160, 255, 0.12);
+    border-radius: 999px;
+  }
+
+  .og-orbit-left {
+    top: -180px;
+    left: -140px;
+    width: 560px;
+    height: 560px;
+  }
+
+  .og-orbit-right {
+    right: -190px;
+    bottom: -250px;
+    width: 700px;
+    height: 700px;
+  }
+
+  .og-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 4px 2px;
+    box-sizing: border-box;
+  }
+
+  .og-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .og-logo {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.98;
+    flex: none;
+  }
+
+  .og-kicker {
+    margin: 0;
+    color: rgba(142, 160, 255, 0.92);
+    font-size: 13px;
+    letter-spacing: 0.28em;
+  }
+
+  .og-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 820px;
+  }
+
+  .og-title {
+    margin: 0;
+    font-size: 78px;
+    line-height: 0.92;
+    letter-spacing: 0.07em;
+  }
+
+  .og-subtitle {
+    margin: 0;
+    font-size: 24px;
+    color: rgba(248, 249, 250, 0.7);
+  }
+
+  .og-description {
+    max-width: 760px;
+    margin: 2px 0 0;
+    font-size: 24px;
+    line-height: 1.38;
+    color: rgba(248, 249, 250, 0.82);
+  }
+
+  .og-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .og-stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  .og-stat {
+    min-width: 144px;
+    padding: 14px 16px;
+    border-top: 1px solid rgba(142, 160, 255, 0.32);
+    border-left: 1px solid rgba(248, 249, 250, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  }
+
+  .og-stat-value {
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 700;
+    color: #f8f9fa;
+  }
+
+  .og-stat-label {
+    margin-top: 8px;
+    color: rgba(142, 160, 255, 0.88);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+
+  .og-url {
+    max-width: 290px;
+    margin: 0;
+    text-align: right;
+    color: rgba(248, 249, 250, 0.42);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    line-height: 1.4;
+  }
+</style>
