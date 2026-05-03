@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ricardious.github.io/physics-lab-portal/sitemap-index.xml

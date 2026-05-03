@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const PDF_OPEN_EVENT = "physics-pdf-modal:open";
 const PDF_CLOSE_EVENT = "physics-pdf-modal:close";
 const base = import.meta.env.BASE_URL;
-const PDF_WORKER_URL = `${base.endsWith("/") ? base : base + "/"}pdf.worker.min.js`;
 
 type PdfModalOpenDetail = {
   url: string;
@@ -32,10 +26,6 @@ function resolveAssetUrl(url: string) {
 export default function PdfModalViewer() {
   const [modalState, setModalState] = useState<PdfModalState>(null);
 
-  const viewerPlugin = defaultLayoutPlugin({
-    sidebarTabs: () => [],
-  });
-
   useEffect(() => {
     const openModal = (event: Event) => {
       const detail = (event as CustomEvent<unknown>).detail;
@@ -55,6 +45,10 @@ export default function PdfModalViewer() {
     };
 
     const handleDocumentClick = (event: MouseEvent) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+
       const target = event.target;
       if (!(target instanceof Element)) return;
 
@@ -117,24 +111,33 @@ export default function PdfModalViewer() {
                 {modalState.title}
               </h2>
             </div>
-            <button
-              type="button"
-              onClick={() => setModalState(null)}
-              className="inline-flex items-center justify-center border border-white/12 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-starlight-text/72 transition-colors hover:border-panel-accent/40 hover:text-panel-accent"
-            >
-              Cerrar
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={modalState.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border border-white/12 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-starlight-text/72 transition-colors hover:border-panel-accent/40 hover:text-panel-accent"
+              >
+                Abrir en pestaña nueva
+              </a>
+              <button
+                type="button"
+                onClick={() => setModalState(null)}
+                className="inline-flex items-center justify-center border border-white/12 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-starlight-text/72 transition-colors hover:border-panel-accent/40 hover:text-panel-accent"
+              >
+                Cerrar
+              </button>
+            </div>
           </header>
 
-          <div className="pdf-modal-viewer min-h-0 flex-1 bg-[#161922]">
-            <Worker workerUrl={PDF_WORKER_URL}>
-              <Viewer
-                key={modalState.url}
-                fileUrl={modalState.url}
-                plugins={[viewerPlugin]}
-                theme="dark"
-              />
-            </Worker>
+          <div className="min-h-0 flex-1 bg-[#161922]">
+            <iframe
+              key={modalState.url}
+              src={modalState.url}
+              title={modalState.title}
+              className="h-full w-full border-0"
+              loading="lazy"
+            />
           </div>
         </section>
       </div>
